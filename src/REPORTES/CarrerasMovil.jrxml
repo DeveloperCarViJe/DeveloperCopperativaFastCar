@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eb3ea032-2869-45b9-8864-745bd97b35d1">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Movil" class="java.lang.Integer"/>
+	<parameter name="FechaIni" class="java.lang.String"/>
+	<parameter name="FechaFin" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT C.TELEFONO TELEFONO,
+       CO.NOMBRES || ' ' || CO.APELLIDOS NOMBRE_CHOFER,
+       C.CLIENTE CLIENTE,
+       C.ORIGEN ORIGEN,
+       C.DESTINO DESTINO,
+       C.VALOR VALOR,
+       C.MOVIL MOVIL,
+       to_char(C.FECHA_HORA_REGISTRO, 'dd/mm/rrrr hh24:mi:ss') FECHA_HORA_REGISTRO,
+       U.NOMBRES || ' ' || U.APELLIDOS OPERADORA
+  FROM CARRERAS C, USUARIOS U, CHOFERES CO
+ WHERE C.USUARIO_ID = U.CEDULA
+   AND C.MOVIL = CO.MOVIL
+   AND C.MOVIL = $P{Movil}
+   AND C.FECHA_HORA_REGISTRO >= TO_DATE('24/03/2017', 'DD/MM/RRRR')
+   AND C.FECHA_HORA_REGISTRO <= TO_DATE('08/04/2017', 'DD/MM/RRRR') + 1
+ order by C.FECHA_HORA_REGISTRO asc]]>
+	</queryString>
+	<field name="TELEFONO" class="java.lang.String"/>
+	<field name="NOMBRE_CHOFER" class="java.lang.String"/>
+	<field name="CLIENTE" class="java.lang.String"/>
+	<field name="ORIGEN" class="java.lang.String"/>
+	<field name="DESTINO" class="java.lang.String"/>
+	<field name="VALOR" class="java.math.BigDecimal"/>
+	<field name="MOVIL" class="java.math.BigDecimal"/>
+	<field name="FECHA_HORA_REGISTRO" class="java.lang.String"/>
+	<field name="OPERADORA" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="86" splitType="Stretch">
+			<image>
+				<reportElement x="174" y="0" width="553" height="46" uuid="27b58812-2031-4519-8022-412547460906"/>
+				<imageExpression><![CDATA["G:\\PROYECTOS\\proyecto cooperativa taxi fastcar\\iconoFastcar.jpeg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="108" y="46" width="328" height="40" uuid="b03e9b7f-4d00-4a9a-8fee-84cf5f51356f"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[REPORTES DE CARRERAS FASTCAR]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="126" height="20" uuid="bd1bbb49-8074-4ee6-a4d8-ef00f5975a68"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reportes de carreras del movil]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="0" width="51" height="20" uuid="50e25f3e-237c-4b2b-94bf-747a93767fbc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Movil}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="177" y="0" width="87" height="20" uuid="6ddd308d-2a03-4c83-b843-332bf38062e3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[desde las fecha]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="264" y="0" width="68" height="20" uuid="9a9d66e4-928b-4329-a741-ba599a17b736"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FechaIni}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="332" y="0" width="45" height="20" uuid="9ce43900-dcbc-429f-9f91-8b5791df02c3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[hasta el]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="0" width="68" height="20" uuid="dcc50474-3e22-4f7a-ace6-fa879ea3404e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="69" height="20" uuid="a654be86-ffd6-4095-a25d-eb23855c40f7"/>
+				<text><![CDATA[TELEFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="2" width="72" height="20" uuid="8af43841-8ff4-4e1f-9dd2-f800286f0029"/>
+				<text><![CDATA[CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="2" width="89" height="20" uuid="75bf04d7-804f-4eae-b41a-27ec6bbfd36d"/>
+				<text><![CDATA[ORIGEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="2" width="85" height="20" uuid="e2cfb1ea-b311-4bfc-bf72-18c9c6efcfae"/>
+				<text><![CDATA[DESTINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="2" width="45" height="20" uuid="5ff78514-eb34-49d2-b8c9-7ab7882129fb"/>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="2" width="63" height="20" uuid="87dbfee3-a08e-4e33-9a4a-4fc2f6eaad7f"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[USUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="2" width="130" height="20" uuid="c22fa0fd-718d-49d3-9f99-4536671f249b"/>
+				<text><![CDATA[FECHA_HORA_REGISTRO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="69" height="20" uuid="ebb85b13-41b5-4c78-a902-d1042a5f518a"/>
+				<textFieldExpression><![CDATA[$F{TELEFONO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="1" width="100" height="20" uuid="b54909cd-c4d8-4de1-a25a-282a3c226061"/>
+				<textFieldExpression><![CDATA[$F{ORIGEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="0" width="74" height="20" uuid="e001e1d6-40e3-41e8-86d6-19183fdf5f52"/>
+				<textFieldExpression><![CDATA[$F{DESTINO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="47" height="20" uuid="3af56a5c-72d4-42d0-9305-d08e708ee2b1"/>
+				<textFieldExpression><![CDATA[$F{VALOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="1" width="128" height="20" uuid="24684964-2610-4475-ac8c-06db15d8fa9d"/>
+				<textFieldExpression><![CDATA[$F{FECHA_HORA_REGISTRO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="0" width="63" height="20" uuid="719ee352-4650-45fd-b040-d9e3d07553ba"/>
+				<textFieldExpression><![CDATA[$F{OPERADORA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="0" width="72" height="20" uuid="2f2d0646-4db4-4158-8cda-c11453e04ad6"/>
+				<textFieldExpression><![CDATA[$F{CLIENTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
